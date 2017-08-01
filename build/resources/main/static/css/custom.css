@@ -1,0 +1,276 @@
+/* Tooltip */
+.tooltip > .tooltip-inner{
+    text-align: left;
+    background-color: steelblue;
+    min-width: 300px;
+}
+/* Tooltip did not render in a table */
+td .tooltip {
+    position:absolute
+}
+
+
+/* Tooltip for non valid genes */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Spin ----------------------------- */
+.glyphicon-spin {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+/* Sticky footer */
+/* Sticky footer styles -------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 80px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 30px;
+    background-color: #f5f5f5;
+}
+
+/* Callouts */
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout + .bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h4 {
+    color: #777;
+}
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+.list-responsive-vertical {
+    max-width:530px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height:62px;
+    word-wrap:break-word;
+}
+
+.list-responsive-vertical2 {
+    max-width:180px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height:100px;
+    word-wrap:break-word;
+}
+
+.list-responsive-vertical3 {
+    max-width:600px;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height:100px;
+    word-wrap:break-word;
+}
+
+.sort-icon {
+    font-size: 9px;
+    margin-left: 5px;
+}
+
+th {
+    cursor:pointer;
+}
+
+#chart rect {
+    fill: white;
+}
+
+path.link {
+    fill: none;
+    stroke: #666;
+    stroke-width: 1px;
+}
+
+marker#licensing {
+    fill: lightgreen;
+}
+
+path.link.licensing {
+    stroke: lightgreen;
+}
+
+path.link.resolved {
+    stroke-dasharray: 0,2 1;
+}
+
+circle {
+    fill: #ccc;
+    stroke: #333;
+    stroke-width: 3px;
+}
+
+text {
+    font: 12px sans-serif;
+    pointer-events: none;
+}
+
+.solid{
+    stroke:solid;
+}
+
+.dashed{
+    stroke-dasharray: 1,1;
+}
+
+text.shadow {
+    stroke: #fff;
+    stroke-width: 4px;
+}
+
+.pool {
+    fill: "white";
+    stroke: "yellow";
+}
+
+marker#arrow {
+    stroke: #000000;
+    fill: #22222;
+}
+
+.legend rect {
+    fill:white;
+    stroke:black;
+    opacity:0.8;}
+/*.legend {                                                   !* NEW *!*/
+    /*font-size: 12px;                                          !* NEW *!*/
+/*}                                                           !* NEW *!*/
+rect {                                                      /* NEW */
+    stroke-width: 2;                                          /* NEW */
+}
+
+/*marker#licensing {*/
+    /*fill: lightgreen;*/
+/*}*/

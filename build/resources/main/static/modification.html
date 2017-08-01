@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="plnApplication">
+<meta charset="UTF-8">
+<title>PLN converter</title>
+
+<head>
+
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Custom  CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon"
+          href="http://www.lincs-dcic.org/images/dcic-logo/favicon.png?v=2"/>
+    <!--This is for the google analytics-->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-101774139-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+<div ng-controller="MainCtrl as ctrl">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="color:#337AB7;" href="/pln">PLN Converter</a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+                <ul class="nav navbar-nav col-sm-5">
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://github.com/sajmmon/PLNconverter" target="_blank">GitHub</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="container">
+        <h3> Input Format Description</h3>
+        <hr/>
+        <div class="bs-callout bs-callout-primary">
+            <p>Protein Line Notation (PLN) is a notation that encodes “protein forms” as a linear string of
+                characters. A protein form is a “splice isoform, mutation variant and co- or post-translationally
+                modified form (and combinations thereof) that can arise from translation from [a] PCG,” as defined by
+                the PRO ontology (Natale 2011). It is based on the open-world assumption and can encode both positive
+                and negative information.</p>
+        </div>
+
+    </div>
+
+    <div class="table">
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 75%;
+                position:absolute;
+                top:50%;
+                left:12.5%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: center;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+
+        <table>
+            <caption>Shorthand Notation Table</caption>
+            <tr>
+                <th>Modification</th>
+                <th>Identifier</th>
+                <th>Modification Annotation</th>
+                <th>Amino Acid Name</th>
+                <th>Amino Acid Notation</th>
+                <th>Diff. Avg.</th>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aA</td>
+                <td>Acetylalanine</td>
+                <td>alanine</td>
+                <td>A</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aR</td>
+                <td>Acetylarginine</td>
+                <td>arginine</td>
+                <td>R</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aD</td>
+                <td>Acetylaspartate</td>
+                <td>Aspartic acid</td>
+                <td>D</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aC</td>
+                <td>Acetylcysteine</td>
+                <td>Cysteine</td>
+                <td>C</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aE</td>
+                <td>Acetylglutamate</td>
+                <td>Glutamic acid</td>
+                <td>E</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aG</td>
+                <td>Acetylglycine</td>
+                <td>Glycine</td>
+                <td>G</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aK</td>
+                <td>Acetyllysine</td>
+                <td>Lysine</td>
+                <td>K</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aM</td>
+                <td>Acetylmethionine</td>
+                <td>Methionine</td>
+                <td>M</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aP</td>
+                <td>Acetylproline</td>
+                <td>Proline</td>
+                <td>P</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aS</td>
+                <td>Acetylserine</td>
+                <td>Serine</td>
+                <td>S</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aT</td>
+                <td>Acetylthreonine</td>
+                <td>Threonine</td>
+                <td>T</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aY</td>
+                <td>Acetyltyrosine</td>
+                <td>Tyrosine</td>
+                <td>Y</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Acetylation</td>
+                <td>aV</td>
+                <td>Acetylvaline</td>
+                <td>Valine</td>
+                <td>V</td>
+                <td>42.0373</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mR</td>
+                <td>Methylarginine</td>
+                <td>Arginine</td>
+                <td>R</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mQ</td>
+                <td>Methylglutamine</td>
+                <td>Glutamine</td>
+                <td>Q</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mH</td>
+                <td>Methylhistidine</td>
+                <td>Histidine</td>
+                <td>H</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mA</td>
+                <td>Methylalanine</td>
+                <td>Alanine</td>
+                <td>A</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mI</td>
+                <td>Methylisoleucine</td>
+                <td>Isoleucine</td>
+                <td>I</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mL</td>
+                <td>Methylleucine</td>
+                <td>Leucine</td>
+                <td>L</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mM</td>
+                <td>Methylmethionine</td>
+                <td>Methionine</td>
+                <td>M</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mF</td>
+                <td>Methylphenylalanine</td>
+                <td>Phenylalanine</td>
+                <td>F</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mP</td>
+                <td>Methylproline</td>
+                <td>Proline</td>
+                <td>P</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mY</td>
+                <td>Methyltyrosine</td>
+                <td>Tyrosine</td>
+                <td>Y</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mN</td>
+                <td>Methylasparagine</td>
+                <td>Asparagine</td>
+                <td>N</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mK</td>
+                <td>Methyllysine</td>
+                <td>Lysine</td>
+                <td>K</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Methylation</td>
+                <td>mC</td>
+                <td>Methylcysteine</td>
+                <td>Cysteine</td>
+                <td>C</td>
+                <td>14.0269</td>
+            </tr>
+            <tr>
+                <td>Phosphorylation</td>
+                <td>pR</td>
+                <td>Phosphoarginine</td>
+                <td>Arginine</td>
+                <td>R</td>
+                <td>79.9799</td>
+            </tr>
+            <tr>
+                <td>Phosphorylation</td>
+                <td>pC</td>
+                <td>Phosphocysteine</td>
+                <td>Cysteine</td>
+                <td>C</td>
+                <td>79.9799</td>
+            </tr>
+            <tr>
+                <td>Phosphorylation</td>
+                <td>pH</td>
+                <td>Phosphohistidine</td>
+                <td>Histidine</td>
+                <td>H</td>
+                <td>79.9799</td>
+            </tr>
+            <tr>
+                <td>Phosphorylation</td>
+                <td>pS</td>
+                <td>Phosphoserine</td>
+                <td>Serine</td>
+                <td>S</td>
+                <td>79.9799</td>
+            </tr>
+            <tr>
+                <td>Phosphorylation</td>
+                <td>pT</td>
+                <td>Phosphothreonine</td>
+                <td>Threonine</td>
+                <td>T</td>
+                <td>79.9799</td>
+            </tr>
+            <tr>
+                <td>Phosphorylation</td>
+                <td>pY</td>
+                <td>Phosphotyrosine</td>
+                <td>Tyrosine</td>
+                <td>Y</td>
+                <td>79.9799</td>
+            </tr>
+
+
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

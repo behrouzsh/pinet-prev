@@ -1,0 +1,51 @@
+spring:
+  jpa.hibernate.ddl-auto: create-drop
+  jackson.serialization.INDENT_OUTPUT: true
+server:
+  contextPath: /pln
+  port: 8090
+
+urls:
+  prosite: http://prosite.expasy.org/cgi-bin/prosite/PSScan.cgi?sig=%s&lineage=%s&db=sp&output=json
+  uniprot: http://www.uniprot.org/uniprot/%s.xml?query=reviewed:yes+AND+organism:%s
+  harmonizomeGene: http://amp.pharm.mssm.edu/Harmonizome//api/1.0/gene/%s
+  harmonizomeProtein: http://amp.pharm.mssm.edu/Harmonizome//api/1.0/protein/%s
+  pir: http://research.bioinformatics.udel.edu/peptidematch/webservices/peptidematch_rest?query=%s&format=xml&organism=9606
+  enrichrAddList: http://amp.pharm.mssm.edu/Enrichr/addList
+  enrichrViewList: http://amp.pharm.mssm.edu/Enrichr/view?userListId=%s
+  enrichrResult: http://amp.pharm.mssm.edu/Enrichr/enrich?userListId=%s&backgroundType=%s
+  enrichrGeneInfo: http://amp.pharm.mssm.edu/Enrichr/genemap?json=true&setup=true&gene=%s
+
+
+resources:
+  mapping: /psi-mod/mapping.csv
+  pcg: /PCG/pcgm.json
+  kinase2GeneHuman: /kinase/kinase2Gene_human.json
+  gene2KinaseHuman: /kinase/gene2Kinase_human.json
+  geneName2KinaseName: /kinase/geneName2KinaseName_human.json
+  phosphoGenes2Kinase: /kinase/gene2Kinase_human_info.json
+  phosphoGeneProbability: /kinase/amino_probability.json
+  phosphoAmino2KinaseSequence: /kinase/kinase_2gene_2sequence.json
+  blosum50Json: /blosum50/blosum50.json
+
+---
+spring:
+  profiles: default
+  datasource:
+    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+---
+spring:
+  profiles: mysql
+  datasource:
+    url: jdbc:mysql://localhost/pln
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect

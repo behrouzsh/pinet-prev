@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.uc.eh.utils.UtilsFormatTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-08-01T20:16:50" hostname="eh1062.wifi.uc.edu" time="0.046">
+  <properties/>
+  <testcase name="testModificationToCharDouble" classname="edu.uc.eh.utils.UtilsFormatTest" time="0.046"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
