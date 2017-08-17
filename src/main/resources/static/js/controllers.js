@@ -158,6 +158,74 @@ appModule.controller("MainCtrl", ['$http', '$scope', '$window', function ($http,
         console.log(inputGenesForPathway);
     };
 
+    self.changePLN = function(similarmod, originalmod,similardescription, originaldescription){
+
+        console.log(similarmod);
+        console.log(originalmod);
+        console.log(similardescription);
+        console.log(originaldescription);
+        // console.log(self.ontologyMappings);
+        console.log(self.plnFormatOne);
+        console.log(self.plnFormatTwo);
+        self.ontologyMappings.map(function (e) {
+            // console.log(e);
+            if (e.identifier === originalmod) {
+                e.identifier = similarmod;
+                e.description = similardescription;
+
+                    e.similar.map(function (e2) {
+                        // console.log(e2);
+                        if (e2.string === similarmod) {
+                            e2.string = originalmod;
+                            e2.description = originaldescription;
+
+                        }
+                    })
+                // }
+            }
+
+
+
+        })
+        var radios = document.getElementsByTagName('inputRadioPLN');
+        for(i=0; i<radios.length; i++ ) {
+            radios[i].onclick = function(e3) {
+                if(e3.ctrlKey) {
+                    this.checked = false;
+                }
+            }
+        }
+        self.plnFormatOne.map(function (e4) {
+            console.log(e4);
+            e4.PTM.map(function (e5) {
+                e5.map(function (e6) {
+                    console.log(e6);
+                    if (e6.identifier === originalmod) {
+                        console.log(e6.identifier);
+                        console.log(similarmod);
+                        e6.identifier = similarmod;
+                    }
+                })
+            })
+        })
+        self.plnFormatOne.map(function (e7) {
+            e7.PTM.map(function (e8) {
+                e8.map(function (e9) {
+                    console.log(e9);
+                    if (e9.identifier === originalmod) {
+
+                        console.log(originalmod);
+                        e9.identifier = similarmod;
+                    }
+                })
+            })
+        })
+
+
+        console.log(self.plnFormatOne);
+        console.log(self.plnFormatTwo);
+    };
+
     $scope.retrieveGenes = function() {
         self.genes = localStorage.getItem("genes");
         localStorage.setItem("genes", "");

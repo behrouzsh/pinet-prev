@@ -233,6 +233,7 @@ public class KinaseService {
 
         network.put("nodes", nodes);
         network.put("edges", edges);
+        log.info("kinase network");
         log.info(network.toString());
         return network;
     }

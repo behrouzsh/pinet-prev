@@ -344,8 +344,8 @@
             </div>
         </pre>
 
-        <pre class="boxed" ng-show="ctrl.formatAsJsonOrInline" style="background-color: #D9EDF7">
-            <div ng-if="!ctrl.formatAsInchOrAllhits">
+        <pre class="boxed" ng-model="ctrl.plnFormatOne" ng-model="ctrl.plnFormatTwo" ng-show="ctrl.formatAsJsonOrInline" style="background-color: #D9EDF7">
+            <div ng-if="!ctrl.formatAsInchOrAllhits" >
                 {{ctrl.plnFormatOne | treeJSON}}
             </div>
             <div ng-if="ctrl.formatAsInchOrAllhits">
@@ -400,30 +400,88 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="mapping in ctrl.ontologyMappings">
-                    <td>{{mapping.modification}}</td>
+                    <td >{{mapping.modification}}</td>
                     <td>{{mapping.shorthand}}</td>
                     <!--New version of http://www.ebi.ac.uk/ols/ontologies/mod/terms?obo_id={{mapping.identifier}}-->
                     <!--Old version of http://www.ebi.ac.uk/ontology-lookup/?termId={{mapping.identifier}}-->
                     <td>
 
                         <a ng-href="http://www.ebi.ac.uk/ols/ontologies/mod/terms?obo_id={{mapping.identifier}}"
-                           target="_blank">
+                           target="_blank" ng-model="mapping.identifier">
 
-                            <!--<a ng-href="modification.html"-->
-                               <!--target="_blank">-->
-                        {{mapping.identifier}}</a>
+                            {{mapping.identifier}}
+                        </a>
+
                     </td>
                     <td>{{mapping.diffavg}}</td>
-                    <td>{{mapping.description}}</td>
+                    <td ng-model="mapping.description">{{mapping.description}}</td>
                     <td>
                         <span ng-repeat="similar in mapping.similar track by $index">
                             <a ng-href="http://www.ebi.ac.uk/ols/ontologies/mod/terms?obo_id={{mapping.identifier}}"
-                               target="_blank">{{similar.string}}</a><br/>
+                               target="_blank"  ng-model="similar.string">
+                                {{similar.string}}
+                            </a>
+                                <input  type="radio" title="Change the modification in PLN based on this selection." name="inputRadioPLN" ng-click="ctrl.changePLN(similar.string,mapping.identifier,similar.description,mapping.description)"/>
+                                <!--<button title="Change the modification in PLN based on this selection." class="btn btn-primary col-sm-offset-10" ng-click="ctrl.changePLN(similar.string,mapping.identifier,similar.description,mapping.description)">Change</button>-->
+
+
+                            <br/>
                         </span>
                     </td>
                 </tr>
                 </tbody>
             </table>
+
+
+
+
+
+            <!--<table class="table table-striped table-bordered">-->
+                <!--<thead>-->
+                <!--<tr>-->
+
+                    <!--<th>Modification</th>-->
+                    <!--<th>Shorthand</th>-->
+                    <!--<th>Identifier</th>-->
+                    <!--<th>DiffAvg</th>-->
+                    <!--<th>Description</th>-->
+                    <!--<th>Similar</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr ng-repeat="mapping in ctrl.ontologyMappings">-->
+                    <!--<td>{{mapping.modification}}</td>-->
+                    <!--<td>{{mapping.shorthand}}</td>-->
+                    <!--&lt;!&ndash;New version of http://www.ebi.ac.uk/ols/ontologies/mod/terms?obo_id={{mapping.identifier}}&ndash;&gt;-->
+                    <!--&lt;!&ndash;Old version of http://www.ebi.ac.uk/ontology-lookup/?termId={{mapping.identifier}}&ndash;&gt;-->
+                    <!--<td>-->
+
+                        <!--<a ng-href="http://www.ebi.ac.uk/ols/ontologies/mod/terms?obo_id={{mapping.identifier}}"-->
+                           <!--target="_blank">-->
+
+                            <!--&lt;!&ndash;<a ng-href="modification.html"&ndash;&gt;-->
+                            <!--&lt;!&ndash;target="_blank">&ndash;&gt;-->
+                            <!--{{mapping.identifier}}</a>-->
+                    <!--</td>-->
+                    <!--<td>{{mapping.diffavg}}</td>-->
+                    <!--<td>{{mapping.description}}</td>-->
+                    <!--<td>-->
+                        <!--<span ng-repeat="similar in mapping.similar track by $index">-->
+                            <!--<a ng-href="http://www.ebi.ac.uk/ols/ontologies/mod/terms?obo_id={{mapping.identifier}}"-->
+                               <!--target="_blank" ><input type="text" ng-model="similar.string"></a>-->
+                            <!--<span>-->
+                                <!--<button  class="btn btn-primary col-sm-offset-10" ng-click="ctrl.changePLN(similar.string,mapping.identifier,similar.description,mapping.description)">Change PLN</button>-->
+                            <!--</span>-->
+
+                            <!--<br/>-->
+                        <!--</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+
+
+
         </div>
         <br/>
 
